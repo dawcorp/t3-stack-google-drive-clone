@@ -236,7 +236,7 @@ export function DriveUI() {
                     {item.type === "folder" ? (
                       <button
                         className="flex items-center gap-3 hover:underline"
-                        onClick={() => handleFolderClick(item.path)}
+                        onClick={() => handleFolderClick((item as { path: string }).path)}
                       >
                         <Folder className="h-5 w-5 text-blue-500" />
                         <span>{item.name}</span>
@@ -287,7 +287,7 @@ export function DriveUI() {
                   {item.type === "folder" ? (
                     <button
                       className="flex flex-col items-center gap-2 w-full"
-                      onClick={() => handleFolderClick(item.path)}
+                      onClick={() => handleFolderClick((item as { path: string }).path)}
                     >
                       <Folder className="h-12 w-12 text-blue-500" />
                       <span className="text-sm truncate w-full">{item.name}</span>
