@@ -20,7 +20,7 @@ export const files = createTable(
     name: text("name").notNull(),
     url: text("url").notNull(),
     parent: bigint("parent", { mode: "number", unsigned: true }).notNull(),
-    size: text("size").notNull(),
+    size: int("size").notNull(),
   },
   (t) => [index("parent_index_file").on(t.parent)],
 )
@@ -32,7 +32,7 @@ export const folders = createTable(
       .primaryKey()
       .autoincrement(),
     name: text("name").notNull(),
-    parent: bigint("parent", { mode: "number", unsigned: true }).notNull(),
+    parent: bigint("parent", { mode: "number", unsigned: true }),
   },
   (t) => [index("parent_index_folder").on(t.parent)],
 )
