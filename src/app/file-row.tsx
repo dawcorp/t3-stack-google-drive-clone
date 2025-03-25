@@ -28,7 +28,7 @@ export function FileRow(props: { file: File }) {
 
 export function FolderRow(props: {
   folder: FoldeType;
-  handleFolderClick: (id: string) => void;
+  handleFolderClick: () => void;
 }) {
   const { folder, handleFolderClick } = props;
   return (
@@ -39,7 +39,7 @@ export function FolderRow(props: {
       <div className="grid grid-cols-12 items-center gap-4">
         <div className="col-span-6 flex items-center">
           <button
-            onClick={() => handleFolderClick(folder.id)}
+            onClick={() => handleFolderClick()}
             className="flex items-center text-gray-100 hover:text-blue-400"
           >
             <Folder className="mr-3" size={20} />

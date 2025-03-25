@@ -1,46 +1,46 @@
-"use client";
+"use client"
 
-import { ChevronRight, Upload } from "lucide-react";
-import { useState } from "react";
-import { Button } from "~/components/ui/button";
-import { mockFiles, mockFolders } from "../lib/mock-data";
-import { FileRow, FolderRow } from "./file-row";
+import { ChevronRight, Upload } from "lucide-react"
+import { useMemo, useState } from "react"
+import { Button } from "~/components/ui/button"
+import { mockFiles, mockFolders } from "../lib/mock-data"
+import { FileRow, FolderRow } from "./file-row"
 
 export default function GoogleDriveClone() {
-  const [currentFolder, setCurrentFolder] = useState<string>("root");
+  const [currentFolder, setCurrentFolder] = useState<string>("root")
 
   const getCurrentFiles = () => {
-    return mockFiles.filter((file) => file.parent === currentFolder);
-  };
+    return mockFiles.filter((file) => file.parent === currentFolder)
+  }
 
   const getCurrentFolders = () => {
-    return mockFolders.filter((folder) => folder.parent === currentFolder);
-  };
+    return mockFolders.filter((folder) => folder.parent === currentFolder)
+  }
 
   const handleFolderClick = (folderId: string) => {
-    setCurrentFolder(folderId);
-  };
+    setCurrentFolder(folderId)
+  }
 
-  const getBreadcrumbs = () => {
-    const breadcrumbs = [];
-    let currentId = currentFolder;
+  const breadcrumbs = useMemo(() => {
+    const breadcrumbs = []
+    let currentId = currentFolder
 
-    while (currentId !== null) {
-      const folder = mockFiles.find((file) => file.id === currentId);
+    while (currentId !== "root") {
+      const folder = mockFolders.find((folder) => folder.id === currentId)
       if (folder) {
-        breadcrumbs.unshift(folder);
-        currentId = folder.parent;
+        breadcrumbs.unshift(folder)
+        currentId = folder.parent ?? "root"
       } else {
-        break;
+        break
       }
     }
 
-    return breadcrumbs;
-  };
+    return breadcrumbs
+  }, [currentFolder])
 
   const handleUpload = () => {
-    alert("Upload functionality would be implemented here");
-  };
+    alert("Upload functionality would be implemented here")
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 p-8 text-gray-100">
@@ -54,7 +54,7 @@ export default function GoogleDriveClone() {
             >
               My Drive
             </Button>
-            {getBreadcrumbs().map((folder, index) => (
+            {breadcrumbs.map((folder, index) => (
               <div key={folder.id} className="flex items-center">
                 <ChevronRight className="mx-2 text-gray-500" size={16} />
                 <Button
@@ -91,12 +91,12 @@ export default function GoogleDriveClone() {
               <FolderRow
                 key={folder.id}
                 folder={folder}
-                handleFolderClick={handleFolderClick}
+                handleFolderClick={() => handleFolderClick(folder.id)}
               />
             ))}
           </ul>
         </div>
       </div>
     </div>
-  );
+  )
 }
