@@ -1,5 +1,5 @@
-import { createEnv } from "@t3-oss/env-nextjs";
-import { z } from "zod";
+import { createEnv } from "@t3-oss/env-nextjs"
+import { z } from "zod"
 
 export const env = createEnv({
   /**
@@ -13,7 +13,7 @@ export const env = createEnv({
     SINGLESTORE_USER: z.string(),
     SINGLESTORE_PASSWORD: z.string(),
     SINGLESTORE_HOST: z.string(),
-    SINGLESTORE_PORT: z.number(),
+    SINGLESTORE_PORT: z.coerce.number(),
     SINGLESTORE_DATABASE: z.string(),
   },
 
@@ -35,7 +35,7 @@ export const env = createEnv({
     SINGLESTORE_USER: process.env.SINGLESTORE_USER,
     SINGLESTORE_PASSWORD: process.env.SINGLESTORE_PASSWORD,
     SINGLESTORE_HOST: process.env.SINGLESTORE_HOST,
-    SINGLESTORE_PORT: parseInt(process.env.SINGLESTORE_PORT),
+    SINGLESTORE_PORT: process.env.SINGLESTORE_PORT,
     SINGLESTORE_DATABASE: process.env.SINGLESTORE_DATABASE,
 
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
@@ -50,4 +50,4 @@ export const env = createEnv({
    * `SOME_VAR=''` will throw an error.
    */
   emptyStringAsUndefined: true,
-});
+})
